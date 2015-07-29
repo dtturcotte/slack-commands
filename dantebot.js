@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
 	botPayload.text = '';
 	botPayload.username = 'my_new_bot';
 	//botPayload.channel = req.body.channel_id;
-	botPayload.channel = '#crub';
+	botPayload.channel = '#tester';
 	botPayload.icon_url = 'http://i.imgur.com/IciaiJt.png';
 
 	//botPayload.userToGet = 'aj';
@@ -19,16 +19,17 @@ module.exports = function (req, res, next) {
 		Get all user IDs first...
 	 */
 
-	//var teststr = 'mai, hello there';
-	//var newstr = teststr.substring(teststr.lastIndexOf(',')+1, teststr.length);
+	var teststr = 'mai, hello there';
+	var newstr = teststr.substring(teststr.lastIndexOf(',')+1, teststr.length);
 	//var newstr = teststr.split(',')[0];
+//	console.log(newstr);
 
-
-	//console.log(newstr);
+	console.log('req.query.text', req.query.text);
 
 
 	if (req.body.text) {
-		botPayload.userToGet = req.body.text;
+
+		botPayload.userToGet = req.query.text.split(',')[0];
 
 		getUserData(botPayload, function (error, status, body) {
 			//console.log('BODY',body);
@@ -63,7 +64,7 @@ module.exports = function (req, res, next) {
 						botPayload.icon_url = image;
 
 						//var teststr = 'mai, hello there';
-						var newstr = req.body.text.substring(req.body.text.lastIndexOf(',')+1, req.body.text.length);
+						var newstr = req.query.text.substring(req.query.text.lastIndexOf(',')+1, req.query.text.length);
 
 						//botPayload.text = req.body.text;
 						botPayload.text = newstr;
