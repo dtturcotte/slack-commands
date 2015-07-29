@@ -29,7 +29,7 @@ module.exports = function (req, res, next) {
 
 	if (req.body.text) {
 
-		botPayload.userToGet = req.query.text.split(',')[0];
+		botPayload.userToGet = req.body.text.split(',')[0];
 
 		getUserData(botPayload, function (error, status, body) {
 			//console.log('BODY',body);
@@ -64,7 +64,7 @@ module.exports = function (req, res, next) {
 						botPayload.icon_url = image;
 
 						//var teststr = 'mai, hello there';
-						var newstr = req.query.text.substring(req.query.text.lastIndexOf(',')+1, req.query.text.length);
+						var newstr = req.body.text.substring(req.body.text.lastIndexOf(',')+1, req.body.text.length);
 
 						//botPayload.text = req.body.text;
 						botPayload.text = newstr;
