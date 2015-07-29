@@ -30,15 +30,40 @@ module.exports = function (req, res, next) {
 					var name = JSON.parse(body).user.name;
 					var no_quotes = name.slice(0, name.length);
 
+					postToSlack(botPayload, function (error, status, body) {
+
+
+
+					});
+
+
 					console.log('BODY', no_quotes);
+
+
+
 					//botPayload.text = body.real_name;
-					return res.status(200).json(botPayload);
+					//return res.status(200).json(botPayload);
 				}
 
 			});
 		}
 	});
 };
+
+function postToSlack (payload, callback) {
+	request({
+		uri: 'https://hooks.slack.com/services/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',
+		method: 'POST',
+		body: JSON.stringify({
+			payload : payload
+		})
+	}, function (error, response, body) {
+		if (error) {
+			return callback(error);
+		}
+		callback(null, response.statusCode, body);
+	});
+}
 
 
 function getUserData (payload, callback) {
