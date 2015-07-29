@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
 	console.log(req.body);
 
 	var botPayload = {};
-	botPayload.text = 'This should be working';
+	botPayload.text = 'I wanna die!!!';
 	botPayload.username = 'my_new_bot';
 	//botPayload.channel = req.body.channel_id;
 	botPayload.channel = '#crub';
