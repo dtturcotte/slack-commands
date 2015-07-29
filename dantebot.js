@@ -5,9 +5,10 @@ module.exports = function (req, res, next) {
 	console.log(req.body);
 
 	var botPayload = {};
-	botPayload.text = "";
-	botPayload.username = req.body.user_name;
+	botPayload.text = '';
+	botPayload.username = 'my_new_bot';
 	botPayload.channel = req.body.channel_id;
+	botPayload.icon_url = 'http://i.imgur.com/IciaiJt.png';
 
 	/*
 		Get all user IDs first...
@@ -31,7 +32,7 @@ module.exports = function (req, res, next) {
 
 					console.log('BODY', no_quotes);
 					//botPayload.text = body.real_name;
-					return res.status(200).json(no_quotes);
+					return res.status(200).json(botPayload);
 				}
 
 			});
