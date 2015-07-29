@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var hellobot = require('./hellobot');
+var dantebot = require('./dantebot');
 
 var app = express();
 var port = process.env.PORT || 3002;
@@ -14,6 +15,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/sdc', hellobot);
+app.get('/dante', dantebot);
 
 // error handler
 app.use(function (err, req, res, next) {
