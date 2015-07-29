@@ -28,11 +28,14 @@ module.exports = function (req, res, next) {
 				} else if (status !== 200) {
 					return next(new Error('Incoming WebHook: ' + status + ' ' + body));
 				} else {
+					console.log('JSON.parse(body)', JSON.parse(body));
 					var name = JSON.parse(body).user.name;
 					var no_quotes = name.slice(0, name.length);
+					var image = JSON.parse(body).user.profile.image_48;
 
+					botPayload.username = no_quotes;
+					botPayload.icon_url = image;
 					postToSlack(botPayload, function (error, status, body) {
-
 
 
 					});
