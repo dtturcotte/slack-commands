@@ -46,8 +46,8 @@ module.exports = function (req, res, next) {
 
 					botPayload.username = no_quotes;
 					botPayload.icon_url = image;
-					//botPayload.text = req.body.text;
-					botPayload.text = 'HI THERE';
+					botPayload.text = req.body.text;
+					//botPayload.text = 'HI THERE';
 
 					//return res.status(200).json(botPayload);
 					postToSlack(botPayload, function (error, status, body) {
@@ -78,7 +78,7 @@ function getUserByID (payload, callback) {
 
 
 	request({
-		uri: 'https://slack.com/api/users.info?token=xoxp-2697721554-7445793969-8170611990-31095b&user=' + payload.userID + '&pretty=1',
+		uri: 'https://slack.com/api/users.info?token=xoxp-2697721554-7445793969-8170611990-31095b&user=U07D3PBUH&pretty=1',
 		method: 'GET',
 		body: JSON.stringify(payload)
 	}, function (error, response, body) {
