@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
 	res.status(200).send('Hello world!')
 });
 
-app.post('/hello', hellobot);
+app.get('/sdc', hellobot);
 
 // error handler
 app.use(function (err, req, res, next) {
