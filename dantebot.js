@@ -52,12 +52,10 @@ module.exports = function (req, res, next) {
 };
 
 function postToSlack (payload, callback) {
+	var val = JSON.stringify(payload);
 	request({
-		uri: 'https://hooks.slack.com/services/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',
-		method: 'POST',
-		body: JSON.stringify({
-			payload : payload
-		})
+		uri: 'https://hooks.slack.com/services/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&payload=val',
+		method: 'POST'
 	}, function (error, response, body) {
 		if (error) {
 			return callback(error);
