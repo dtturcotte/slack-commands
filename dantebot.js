@@ -35,6 +35,8 @@ module.exports = function (req, res, next) {
 
 					botPayload.username = no_quotes;
 					botPayload.icon_url = image;
+					botPayload.text = req.body.text;
+					
 					postToSlack(botPayload, function (error, status, body) {
 
 
