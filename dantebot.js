@@ -19,6 +19,14 @@ module.exports = function (req, res, next) {
 		Get all user IDs first...
 	 */
 
+	//var teststr = 'mai, hello there';
+	//var newstr = teststr.substring(teststr.lastIndexOf(',')+1, teststr.length);
+	//var newstr = teststr.split(',')[0];
+
+
+	//console.log(newstr);
+
+
 	if (req.body.text) {
 		botPayload.userToGet = req.body.text;
 
@@ -53,8 +61,12 @@ module.exports = function (req, res, next) {
 
 						botPayload.username = no_quotes;
 						botPayload.icon_url = image;
-						botPayload.text = req.body.text;
-						//botPayload.text = 'HI THERE';
+
+						//var teststr = 'mai, hello there';
+						var newstr = req.body.text.substring(req.body.text.lastIndexOf(',')+1, req.body.text.length);
+
+						//botPayload.text = req.body.text;
+						botPayload.text = newstr;
 
 						//return res.status(200).json(botPayload);
 						postToSlack(botPayload, function (error, status, body) {
