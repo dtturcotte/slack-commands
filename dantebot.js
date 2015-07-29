@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
 	botPayload.text = 'This should be working';
 	botPayload.username = 'my_new_bot';
 	//botPayload.channel = req.body.channel_id;
-	botPayload.channel = '@simonsays';
+	botPayload.channel = '#crub';
 	botPayload.icon_url = 'http://i.imgur.com/IciaiJt.png';
 
 	/*
