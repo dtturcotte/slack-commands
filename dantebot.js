@@ -13,21 +13,21 @@ module.exports = function (req, res, next) {
 	//console.log('REQ BODY TEXT', req.body.text);
 
 	//curl -X GET --data "text=username" http://localhost:3002/sdc : mimics the user's input text in SLACK
+
+	//console.log('req.query.text', req.query.text);
+	//console.log('req.body.text', req.body.text);
 	//return res.status(200).json('HELLO ' + req.body.text);
 
 	/*
 		Get all user IDs first...
 	 */
 
-	var teststr = 'mai, hello there';
-	var newstr = teststr.substring(teststr.lastIndexOf(',')+1, teststr.length);
+	//var teststr = 'mai, hello there';
+	//var newstr = teststr.substring(teststr.lastIndexOf(',')+1, teststr.length);
 	//var newstr = teststr.split(',')[0];
 //	console.log(newstr);
-
-	console.log('req.query.text', req.query.text);
-
-
-	if (req.body.text) {
+	
+	if (typeof req.body.text !== 'undefined') {
 
 		botPayload.userToGet = req.body.text.split(',')[0];
 
