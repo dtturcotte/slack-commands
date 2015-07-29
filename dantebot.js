@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
 	console.log(req.body);
 
 	var botPayload = {};
-	botPayload.text = '';
+	botPayload.text = 'This should be working';
 	botPayload.username = 'my_new_bot';
 	//botPayload.channel = req.body.channel_id;
 	botPayload.channel = '@simonsays';
@@ -53,13 +53,19 @@ module.exports = function (req, res, next) {
 
 function postToSlack (payload, callback) {
 	var val = JSON.stringify(payload);
+	console.log('PAYLOAD', val);
 	request({
-		uri: 'https://hooks.slack.com/services/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&payload=val',
+		headers: {
+			'content-type': 'application/json'
+		},
+		uri: 'https://hooks.slack.com/services/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',
+		body: val,
 		method: 'POST'
 	}, function (error, response, body) {
 		if (error) {
 			return callback(error);
 		}
+		console.log('RESPONSE', body);
 		callback(null, response.statusCode, body);
 	});
 }
