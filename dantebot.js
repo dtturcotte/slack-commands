@@ -8,9 +8,7 @@ module.exports = function (req, res, next) {
 	botPayload.channel = req.body.channel_id;
 
 	if (typeof req.body.text !== 'undefined') {
-
 		botPayload.userToGet = req.body.text.split('^')[0];
-
 		getUserData(botPayload, function (error, status, body) {
 
 			if (error) {
@@ -18,9 +16,8 @@ module.exports = function (req, res, next) {
 			} else if (status !== 200) {
 				return next(new Error('Incoming WebHook: ' + status + ' ' + body));
 			} else {
-
-				var userDataArray = JSON.parse(body);
-				var profileFound = false;
+				var userDataArray = JSON.parse(body),
+					profileFound = false;
 				for (var i = 0; i < userDataArray.members.length; i++) {
 					if (!profileFound) {
 						if (userDataArray.members[i].name === botPayload.userToGet) {
@@ -36,7 +33,7 @@ module.exports = function (req, res, next) {
 					if (error) {
 						return next(error);
 					} else if (status !== 200) {
-						return next(new Error('Incoming WebHook: ' + status + ' ' + body));
+						return next(new Error('AH AH AH, YOU DIDN\'T SAY THE MAGIC WORD!'));
 					} else {
 						return res.status(200);
 					}
