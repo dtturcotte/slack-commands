@@ -36,7 +36,7 @@ module.exports = function (req, res, next) {
 						botPayload.username = 'nedry';
 						botPayload.icon_url = 'http://i.imgur.com/AwFZGEa.png';
 						botPayload.text = 'AH AH AH, YOU DIDN\'T SAY THE MAGIC WORD!';
-						return res.status(500).(botPayload);
+						return res.status(500).json(botPayload);
 						//return next(new Error('AH AH AH, YOU DIDN\'T SAY THE MAGIC WORD!'));
 					} else {
 						return res.status(200);
