@@ -21,7 +21,6 @@ module.exports = function (req, res, next) {
 				for (var i = 0; i < userDataArray.members.length; i++) {
 					if (!profileFound) {
 						if (userDataArray.members[i].name === botPayload.userToGet) {
-							botPayload.userID = userDataArray.members[i].id;
 							botPayload.username = userDataArray.members[i].name;
 							botPayload.icon_url = userDataArray.members[i].profile.image_48;
 							botPayload.text = req.body.text.substring(req.body.text.lastIndexOf('^') + 1, req.body.text.length);
@@ -36,7 +35,10 @@ module.exports = function (req, res, next) {
 						botPayload.username = 'nedry';
 						botPayload.icon_url = 'http://i.imgur.com/AwFZGEa.png';
 						botPayload.text = 'AH AH AH, YOU DIDN\'T SAY THE MAGIC WORD!';
-						return res.status(500).json(botPayload);
+						postToSlack(botPayload, function (error, status, body) {
+							return res.status(200);
+						});
+						//return res.status(500).json(botPayload);
 						//return next(new Error('AH AH AH, YOU DIDN\'T SAY THE MAGIC WORD!'));
 					} else {
 						return res.status(200);
