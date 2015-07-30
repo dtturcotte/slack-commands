@@ -1,6 +1,7 @@
 var request = require('request');
 
 module.exports = function (req, res, next) {
+	return res.status(200).json('success');
 	var botPayload = {};
 	botPayload.text = '';
 	botPayload.username = 'my_new_bot';
