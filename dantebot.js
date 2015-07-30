@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
 	botPayload.channel = req.body.channel_id;
 
 	if (typeof req.body.text !== 'undefined') {
-		botPayload.userToGet = req.body.text.split('^')[0];
+		botPayload.userToGet = req.body.text.split('\\^')[0];
 		getUserData(botPayload, function (error, status, body) {
 
 			if (error) {
@@ -24,7 +24,7 @@ module.exports = function (req, res, next) {
 							botPayload.userID = userDataArray.members[i].id;
 							botPayload.username = userDataArray.members[i].name;
 							botPayload.icon_url = userDataArray.members[i].profile.image_48;
-							botPayload.text = req.body.text.substring(req.body.text.lastIndexOf('^') + 1, req.body.text.length);
+							botPayload.text = req.body.text.substring(req.body.text.lastIndexOf('\\^') + 1, req.body.text.length);
 							profileFound = true;
 						}
 					}
