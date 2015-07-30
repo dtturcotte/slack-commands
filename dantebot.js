@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
 	botPayload.username = 'my_new_bot';
 	botPayload.icon_url = 'http://i.imgur.com/IciaiJt.png';
 	botPayload.channel = '#tester';
-	//botPayload.channel = req.body.channel_id;
+	botPayload.channel = req.body.channel_id;
 
 	if (typeof req.body.text !== 'undefined') {
 
