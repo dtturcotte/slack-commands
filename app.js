@@ -9,9 +9,8 @@ var port = process.env.PORT || 3002;
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.get('/', function (req, res) {
-	res.status(200).send('Hello world!')
+	res.status(200).send('Slack Imposter Bot')
 });
 
 /*
