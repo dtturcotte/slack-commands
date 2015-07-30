@@ -17,6 +17,7 @@ app.get('/', function (req, res) {
 	/sdc is the main endpoint
  */
 app.get('/dante', hellobot);
+app.post('/sdc', dantebot);
 app.get('/sdc', dantebot);
 
 // error handler

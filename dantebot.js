@@ -1,19 +1,16 @@
 var request = require('request');
 
 module.exports = function (req, res, next) {
-	return res.status(200).json('success');
 	var botPayload = {};
 	botPayload.text = '';
 	botPayload.username = 'my_new_bot';
 	botPayload.icon_url = 'http://i.imgur.com/IciaiJt.png';
-	botPayload.channel = '#smash-bros';
+	botPayload.channel = '#tester';
 	//botPayload.channel = req.body.channel_id;
-	var query = req.query.text;
-	var bodytext = req.body.text;
 
-	if (typeof query !== 'undefined') {
+	if (typeof req.body.text !== 'undefined') {
 
-		botPayload.userToGet = query.split(',')[0];
+		botPayload.userToGet = req.body.text.split(',')[0];
 
 		getUserData(botPayload, function (error, status, body) {
 
@@ -31,7 +28,7 @@ module.exports = function (req, res, next) {
 							botPayload.userID = userDataArray.members[i].id;
 							botPayload.username = userDataArray.members[i].name;
 							botPayload.icon_url = userDataArray.members[i].profile.image_48;
-							botPayload.text = query.substring(req.body.text.lastIndexOf(',') + 1, query.length);
+							botPayload.text = req.body.text.substring(req.body.text.lastIndexOf(',') + 1, req.body.text.length);
 							profileFound = true;
 						}
 					}
@@ -42,7 +39,7 @@ module.exports = function (req, res, next) {
 					} else if (status !== 200) {
 						return next(new Error('Incoming WebHook: ' + status + ' ' + body));
 					} else {
-						return res.status(200).json('success');
+						return res.status(200).json(req.body.text);
 					}
 				});
 			}
