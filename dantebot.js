@@ -33,7 +33,15 @@ module.exports = function (req, res, next) {
 						}
 					}
 				}
-				postToSlack(botPayload, function (error, status, body) {});
+				postToSlack(botPayload, function (error, status, body) {
+					if (error) {
+						return next(error);
+					} else if (status !== 200) {
+						return next(new Error('Incoming WebHook: ' + status + ' ' + body));
+					} else {
+						return res.status(200).json(req.query.text);
+					}
+				});
 			}
 		});
 	}
