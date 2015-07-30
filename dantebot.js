@@ -39,7 +39,7 @@ module.exports = function (req, res, next) {
 					} else if (status !== 200) {
 						return next(new Error('Incoming WebHook: ' + status + ' ' + body));
 					} else {
-						return res.status(200).json(req.body.text);
+						return res.status(200);
 					}
 				});
 			}
