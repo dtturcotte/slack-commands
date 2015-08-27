@@ -27,7 +27,7 @@ module.exports = function (req, res, next) {
 				return next(new Error('Incoming WebHook: ' + status + ' ' + body));
 			} else {
 				var w = JSON.parse(body);
-				botPayload.text = w.list[0].definition;
+				botPayload.text = req.body.text + ': ' + w.list[0].definition;
 				postToSlack(botPayload, function (error, status, body) {
 					if (error) {
 						return next(error);
