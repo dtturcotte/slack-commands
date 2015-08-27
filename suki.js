@@ -6,6 +6,7 @@ module.exports = function (req, res, next) {
 	botPayload.icon_url = 'http://i.imgur.com/BWyCcsA.png';
 	botPayload.text = 'No result found...';
 	botPayload.channel = req.body.channel_id;
+	botPayload.user_id = req.body.user_id;
 
 	/*
 		req.query: query from URL or DHC
@@ -27,7 +28,7 @@ module.exports = function (req, res, next) {
 				return next(new Error('Incoming WebHook: ' + status + ' ' + body));
 			} else {
 				var w = JSON.parse(body);
-				botPayload.text = req.body.text + ': ' + w.list[0].definition;
+				botPayload.text = req.body.user_name + ' wants to know what "' + req.body.text + '" means... : ' + w.list[0].definition;
 				postToSlack(botPayload, function (error, status, body) {
 					if (error) {
 						return next(error);
