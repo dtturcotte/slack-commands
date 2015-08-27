@@ -2,32 +2,32 @@ var request = require('request');
 
 module.exports = function (req, res, next) {
 	var botPayload = {};
-	botPayload.username = 'nedry';
-	botPayload.icon_url = 'http://i.imgur.com/AwFZGEa.png';
-	botPayload.text = 'AH AH AH, YOU DIDN\'T SAY THE MAGIC WORD!';
+	botPayload.username = 'urban';
+	botPayload.icon_url = 'http://i.imgur.com/BWyCcsA.png';
+	botPayload.text = 'No result found...';
 	botPayload.channel = req.body.channel_id;
 
-	if (typeof req.body.text !== 'undefined') {
-		botPayload.userToGet = req.body.text.split('^')[0];
-		getUserData(botPayload, function (error, status, body) {
+	/*
+		req.query: query from URL or DHC
+	 		localhost:3004/suki?text=csb
 
+		req.body: text from cURL request or Slack
+	 		curl -X POST --data "text=csb" http://localhost:3004/suki
+
+		 console.log('req.body', req.body.text);
+		 console.log('req.query', req.query.text);
+	 */
+
+	if (typeof req.query.text !== 'undefined') {
+
+		getWordDefinition(req.query.text, function (error, status, body) {
 			if (error) {
 				return next(error);
 			} else if (status !== 200) {
 				return next(new Error('Incoming WebHook: ' + status + ' ' + body));
 			} else {
-				var userDataArray = JSON.parse(body),
-					profileFound = false;
-				for (var i = 0; i < userDataArray.members.length; i++) {
-					if (!profileFound) {
-						if (userDataArray.members[i].name === botPayload.userToGet) {
-							botPayload.username = userDataArray.members[i].name;
-							botPayload.icon_url = userDataArray.members[i].profile.image_48;
-							botPayload.text = req.body.text.substring(req.body.text.lastIndexOf('^') + 1, req.body.text.length);
-							profileFound = true;
-						}
-					}
-				}
+				var w = JSON.parse(body);
+				botPayload.text = w.list[0].definition;
 				postToSlack(botPayload, function (error, status, body) {
 					if (error) {
 						return next(error);
@@ -60,11 +60,10 @@ function postToSlack (payload, callback) {
 	});
 };
 
-function getUserData (payload, callback) {
+function getWordDefinition (text, callback) {
 	request({
-		uri: 'https://slack.com/api/users.list?token=xoxp-2697721554-7445793969-8170611990-31095b&pretty=1',
-		method: 'GET',
-		body: JSON.stringify(payload)
+		uri: 'http://api.urbandictionary.com/v0/define?term='+text,
+		method: 'GET'
 	}, function (error, response, body) {
 		if (error) {
 			return callback(error);
