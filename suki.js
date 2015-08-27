@@ -18,9 +18,9 @@ module.exports = function (req, res, next) {
 		 console.log('req.query', req.query.text);
 	 */
 
-	if (typeof req.query.text !== 'undefined') {
+	if (typeof req.body.text !== 'undefined') {
 
-		getWordDefinition(req.query.text, function (error, status, body) {
+		getWordDefinition(req.body.text, function (error, status, body) {
 			if (error) {
 				return next(error);
 			} else if (status !== 200) {
