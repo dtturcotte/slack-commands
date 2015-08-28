@@ -9,6 +9,7 @@ module.exports = function (req, res, next) {
 
 	if (typeof req.body.text !== 'undefined') {
 		botPayload.userToGet = req.body.text.split('^')[0];
+		
 		getUserData(botPayload, function (error, status, body) {
 
 			if (error) {

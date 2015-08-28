@@ -1,9 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var hellobot = require('./hellobot');
 var dantebot = require('./dantebot');
 var suki = require('./suki');
-var joaobot = require('./joaobot');
 
 var app = express();
 var port = process.env.PORT || 3004;
@@ -18,13 +16,10 @@ app.get('/', function (req, res) {
 /*
 	/sdc is the main endpoint
  */
-app.get('/dante', hellobot);
 app.post('/sdc', dantebot);
 app.get('/sdc', dantebot);
 app.post('/suki', suki);
 app.get('/suki', suki);
-app.post('/joao', joaobot);
-app.get('/joao', joaobot);
 
 // error handler
 app.use(function (err, req, res, next) {

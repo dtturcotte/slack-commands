@@ -14,9 +14,6 @@ module.exports = function (req, res, next) {
 
 		req.body: text from cURL request or Slack
 	 		curl -X POST --data "text=csb" http://localhost:3004/suki
-
-		 console.log('req.body', req.body.text);
-		 console.log('req.query', req.query.text);
 	 */
 
 	if (typeof req.body.text !== 'undefined') {
